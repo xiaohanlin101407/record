@@ -132,30 +132,26 @@ function parse(){
     }
     document.getElementById("display").innerHTML=ans;
 }
-function parseLine(k){
-    var r='';
-    r+=t(k[0])+t(k[1]);
-    r+=t(k[2].replace(new RegExp("&lt;br&gt;", "g"), "<br>"));
-    switch(k[3]){
-        case "NULL":
-            r+=t("<label>目前此任务无关联文件</label>");
-            break;
-        case "/downloadAction?name=Li91cGxvYWQvNS9zdWNjZXNzLnR4dA==":
-            r+=t("<label>任务完成，无惩罚</label>");
-            break;
-        default:
-            r+=t('<a href="'+k[3]+'">点击下载</a>');
-            break;
-    }
-    r+=t(k[4]);
-    link='jumpto("'+getEncode64( "/planModify?id="+k[5])+'")';
-    r+=t('<button onclick="'+link+'" class="modifyBtn">修改计划</button>');
-    document.getElementById("display").innerHTML+=r;
-}
 function loadPlans(){
     lines=document.getElementById("content").innerHTML.split("\n");
     for(var i=0;i<lines.length;i++){
-        parseLine(lines[i].split("|"));
+        k=lines[i].split("|");
+        r+=t(k[0])+t(k[1]);
+        k[2]=k[2].replace(new RegExp("&lt;br&gt;", "g"), "<br>");
+        switch(k[3]){
+            case "NULL":
+                k[3]="<label>目前此任务无关联文件</label>";
+                break;
+            case "/downloadAction?name=Li91cGxvYWQvNS9zdWNjZXNzLnR4dA==":
+                k[3]="<label>任务完成，无惩罚</label>";
+                break;
+            default:
+                k[3]='<a href="'+k[3]+'">点击下载</a>';
+                break;
+        }
+        link='jumpto("'+getEncode64( "/planModify?id="+k[5])+'")';
+        k[5]='<button onclick="'+link+'" class="modifyBtn">修改计划</button>';
+        document.getElementById("display").innerHTML+=getLine(k);
     }
 }
 function getContent(id) {
