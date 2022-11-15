@@ -115,8 +115,24 @@ function jumpto(l){
     console.log(l);
     top.location= l;
 }
-function parseLine(line){
-    k=line.split("|");
+function getLine(StringArray){
+    var res="";
+    for(var i=0;i<StringArray.length;i++){
+        res+=t(StringArray[i]);
+    }
+    return "<tr>"+res+"</tr>";
+}
+function parse(){
+    lines=document.getElementById("content").innerHTML.split("\n");
+    var ans="";
+    for(var i=0;i<lines.length;i++){
+        array=lines[i].split("|");
+        array[2]='<a href="/blogView?id='+array[2]+'">点击看这篇博客</a>'
+        ans+=getLine(array);
+    }
+    document.getElementById("display").innerHTML=ans;
+}
+function parseLine(k){
     var r='';
     r+=t(k[0])+t(k[1]);
     r+=t(k[2].replace(new RegExp("&lt;br&gt;", "g"), "<br>"));
@@ -139,7 +155,7 @@ function parseLine(line){
 function loadPlans(){
     lines=document.getElementById("content").innerHTML.split("\n");
     for(var i=0;i<lines.length;i++){
-        parseLine(lines[i]);
+        parseLine(lines[i].split("|"));
     }
 }
 function getContent(id) {
