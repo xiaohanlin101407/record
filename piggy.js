@@ -149,7 +149,7 @@ function parseLine(k){
     }
     r+=t(k[4]);
     link='jumpto("'+getEncode64( "/planModify?id="+k[5])+'")';
-    r+=t('<button onclick='+link+'>修改计划</a>');
+    r+=t('<button onclick="'+link+'" class="modifyBtn">修改计划</button>');
     document.getElementById("display").innerHTML+=r;
 }
 function loadPlans(){
