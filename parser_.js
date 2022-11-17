@@ -226,7 +226,7 @@ var translate;
             var katexInline = function (latex) {
                 options.displayMode = false;
                 try {
-                    return katex.renderToString(latex, options);
+                    return katex.renderToString(latex, options, strict="error");
                 }
                 catch (error) {
                     if (options.throwOnError) { console.log(error); }
