@@ -8,10 +8,7 @@ var translate;
                  return s ;
     })({
     1: [function (require, module, exports) {
-            var md = require('markdown-it')(),
-        var input = document.getElementById('input'),
-            output = document.getElementById('output'),
-            button = document.getElementById('button');
+            var md = require('markdown-it')();
 
         function s(input){
 
