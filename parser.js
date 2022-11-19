@@ -9,7 +9,9 @@ var translate;
     })({
     1: [function (require, module, exports) {
             var md = require('markdown-it')();
+        var mk = require('./index');
 
+md.use(mk,{"strict":"warn"});
         function s(input){
 
             var result = md.render(input,strict=false);
